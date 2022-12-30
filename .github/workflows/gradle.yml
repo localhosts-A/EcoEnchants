@@ -26,4 +26,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: EcoEnchants
-          path: eco-core/build/libs
+          path: eco-core/core-plugin/build/libs
