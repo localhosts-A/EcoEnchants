@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x ./eco-core/gradlew
 
       - name: Set up JDK 17
         uses: actions/setup-java@v2
