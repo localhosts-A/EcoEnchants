@@ -23,7 +23,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --full-stacktrace
       - name: check folders
-        run: ls eco-core
+        run: ls eco-core/build
         
       - uses: actions/upload-artifact@v2
         with:
