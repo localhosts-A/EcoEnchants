@@ -67,7 +67,6 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
         val shouldDescribe = (plugin.configYml.getBool("display.descriptions.enabled") &&
                 enchants.size <= plugin.configYml.getInt("display.descriptions.threshold")
                 && player?.seesEnchantmentDescriptions ?: true)
-                || pdc.has(plugin.namespacedKeyFactory.create("force-describe"), PersistentDataType.INTEGER)
 
         val formattedNames = mutableMapOf<DisplayableEnchant, String>()
 
@@ -82,7 +81,7 @@ class EnchantDisplay(private val plugin: EcoEnchantsPlugin) : DisplayModule(plug
                 val enchantNotMetLines = enchantLevel.conditions.getNotMetLines(player, holder).map { Display.PREFIX + it }
                 notMetLines.addAll(enchantNotMetLines)
 
-                if (enchantNotMetLines.isNotEmpty()) {
+                if (enchantNotMetLines.isNotEmpty() || enchantLevel.conditions.isShowingAnyNotMet(player, holder)) {
                     showNotMet = true
                 }
             }

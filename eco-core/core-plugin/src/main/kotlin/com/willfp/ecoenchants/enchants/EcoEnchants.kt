@@ -3,14 +3,11 @@ package com.willfp.ecoenchants.enchants
 import com.google.common.collect.HashBiMap
 import com.google.common.collect.ImmutableSet
 import com.willfp.eco.core.config.interfaces.Config
-import com.willfp.eco.core.config.updating.ConfigUpdater
 import com.willfp.ecoenchants.EcoEnchantsPlugin
 import com.willfp.ecoenchants.enchants.impl.EnchantmentPermanenceCurse
-import com.willfp.ecoenchants.enchants.impl.EnchantmentRapid
 import com.willfp.ecoenchants.enchants.impl.EnchantmentRepairing
 import com.willfp.ecoenchants.enchants.impl.EnchantmentReplenish
 import com.willfp.ecoenchants.enchants.impl.EnchantmentSoulbound
-import com.willfp.ecoenchants.enchants.impl.EnchantmentTelekinesis
 import com.willfp.ecoenchants.integrations.EnchantRegistrations
 import com.willfp.ecoenchants.rarity.EnchantmentRarities
 import com.willfp.ecoenchants.target.EnchantmentTargets
@@ -20,12 +17,13 @@ import com.willfp.libreforge.loader.configs.ConfigCategory
 import org.bukkit.ChatColor
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
-import org.bukkit.event.Listener
 
 @Suppress("UNUSED")
 object EcoEnchants : ConfigCategory("enchant", "enchants") {
     private val BY_KEY = HashBiMap.create<String, EcoEnchant>()
     private val BY_NAME = HashBiMap.create<String, EcoEnchant>()
+
+    override val shouldPreload = true
 
     /**
      * Get all registered [EcoEnchant]s.
@@ -193,10 +191,8 @@ object EcoEnchants : ConfigCategory("enchant", "enchants") {
     private fun registerHardcodedEnchantments(
         plugin: EcoEnchantsPlugin
     ) {
-        EnchantmentTelekinesis(plugin)
         EnchantmentPermanenceCurse(plugin)
         EnchantmentRepairing(plugin)
-        EnchantmentRapid(plugin)
         EnchantmentReplenish(plugin)
         EnchantmentSoulbound(plugin)
     }

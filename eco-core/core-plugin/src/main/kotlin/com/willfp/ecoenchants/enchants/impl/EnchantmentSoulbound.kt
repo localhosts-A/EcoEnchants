@@ -45,7 +45,7 @@ class EnchantmentSoulbound(
         private val soulboundKey = plugin.namespacedKeyFactory.create("soulbound")
 
         @EventHandler(
-            priority = EventPriority.LOW,
+            priority = EventPriority.HIGHEST,
             ignoreCancelled = true
         )
         fun handle(event: PlayerDeathEvent) {
@@ -131,7 +131,9 @@ class EnchantmentSoulbound(
             ignoreCancelled = true
         )
         fun preventDroppingSoulboundItems(event: PlayerDeathEvent) {
-            event.drops.removeIf { it.fast().persistentDataContainer.has(soulboundKey, PersistentDataType.INTEGER) }
+            event.drops.removeIf { it.fast().persistentDataContainer.has(soulboundKey, PersistentDataType.INTEGER)
+                    && it.itemMeta.hasEnchant(enchant)
+            }
         }
     }
 }
